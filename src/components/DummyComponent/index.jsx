@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { dummy } from "../../actions/";
-import store from "../../store/";
 
 class Dummy extends Component {
   componentDidMount() {
-    store.dispatch(this.props.dummyFun);
+    this.props.dummyFun("Hello India");
   }
   render() {
     return <div />;
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return { dummyFun: dispatch(dummy()) };
+  return bindActionCreators({ dummyFun: message => dummy(message) }, dispatch);
 };
 
 const DummyComponent = connect(
